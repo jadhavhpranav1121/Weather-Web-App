@@ -1,0 +1,14 @@
+{
+  "name": "weather-project",
+  "version": "1.0.0",
+  "description": "Creating a Weather Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pranav Jadhav",
+  "license": "ISC",
+  "dependencies": {
+    "requests": "^0.3.0"
+  }
+}

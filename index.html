@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+    <script src="https://kit.fontawesome.com/363d11af73.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="index.css"/>  -->
+    <style>
+        *{
+         padding:0;
+        margin:0;   
+        font-family:"roboto";
+        }
+        .main_div{
+            width:100vw;
+            height:100vh;
+            display: grid;
+            place-items: center;
+            }
+    .center_div{
+        width:200px;
+        height:300px;
+    background:#a5bbdd;
+    position:relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(112, 112, 112, 0.7); 
+}
+#weathercon{
+    position:absolute;
+    top:15%;
+    left:36%;
+    animation: scale 4s linear infinite;
+}
+@keyframes scale {
+    from{
+        transform: scale(1);
+    }
+    to{
+        transform: scale(1.4);
+    }
+}
+.wave1,.wave2,.wave3{
+    width:300px;
+    height:300px;  
+    position: absolute;
+    top:150px;
+    left:-50px;
+    background-color: #127cd3;
+    border-radius:135px;
+}
+.wave1{
+    /* background:#58aed6 */
+    animation: wave 5s linear infinite;
+    opacity: 0.3;
+}
+@keyframes wave{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.wave2{
+    top:154px;
+    /* background:#127cd3; */
+    animation: wave1 5s linear infinite;
+    opacity: 0.5;
+}
+@keyframes wave1{
+    0%{
+        transform: rotate(40deg);
+    }
+    100%{
+        transform: rotate(400deg);
+    }
+}
+.wave3{
+    top:158px;
+    /* background:#885dff; */
+    animation: wave3 5s linear infinite;
+    opacity: 0.9;
+}
+@keyframes wave3{
+    0%{
+        transform: rotate(60deg);
+    }
+    100%{
+        transform: rotate(420deg);
+    }
+}
+.location,.temp{
+    color:aliceblue;
+    font-size:15px;
+}
+.details{
+    width:200px;
+    height:120px;
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    bottom:0px;
+    align-items:center;
+}   
+#date,p{
+    font-size:10px;
+}
+    </style>
+</head>
+<body>
+    <script src="index.js"></script>
+    <div class="main_div">
+        <div class="center_div">
+            <div id="weathercon">
+                <i class="fas fa-{%change%}" style="font-size:50px;color:white;"></i>
+            </div>        
+            <div class="wave1"></div>
+            <div class="wave2"></div>
+            <div class="wave3"></div>
+            <div class="details">
+                <i class="fas fa-street-view" style="display:inline;"></i><h2 class="location">{%location%},{%country%}</h2>
+                <p id="date">Date</p>
+                <br>
+                <h2 class="temp">Temp - {%tempval%}</h2>
+                <p>Min - {%tempmin%} | Max - {%tempmax%}</p>
+            </div>
+    
+        </div>
+    </div>
+    <script>
+        let new1=document.getElementById("date");
+        let weathercon=document.getElementById("weathercon");
+        const tempStatus="clouds";
+        var weekday=new Array(7);
+        weekday=["sunday","Monday","Tuesday","Wednesday","thursday","Fri","sa"];
+        const getCurrentDay=()=>{
+            let currentTime=new Date();
+            let get1=weekday[currentTime.getDay()];
+            return get1;
+        }
+        const getCurrentTime=()=>{
+            var now=new Date();
+            var month=now.getMonth()+1;
+            var day=now.getDate();
+            let hours=now.getHours();
+            let mins=now.getMinutes();
+            var year=now.getFullYear();
+            let period="AM";
+            let Months=["Jan","Feb","Mar","Apr","May","Jun","July","Aug","Sep","Nov","Dec"];
+            if(hours>11){
+                period="PM";
+                if(hours>12) hours-=12;
+            }
+            if(mins<10){
+                mins="0"+mins;
+            }
+            let ans=day+"-"+Months[month-1]+"-"+year+" | "+hours+":"+mins+" "+period;
+            return ans;
+        }
+        new1.innerHTML=(getCurrentDay()+" | "+getCurrentTime());
+        </script>
+</body>
+</html>
